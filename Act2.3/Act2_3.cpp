@@ -20,7 +20,7 @@ std::string lastIP(std::string& ip){
     std::stringstream ssCurrentIP(ip);
     int numsIP=4;
     int arr[4];
-    for (int i=0; i<numsIP; i++){
+    for (int i=0; i < numsIP; i++){
         ssCurrentIP>>arr[i];
         ssCurrentIP.ignore();
     }
@@ -33,7 +33,7 @@ std::string nextIP(std::string& ip){
     std::stringstream ssCurrentIP(ip);
     int numsIP=4;
     int arr[4];
-    for (int i=0; i<numsIP; i++){
+    for (int i=0; i < numsIP; i++){
         ssCurrentIP>>arr[i];
         ssCurrentIP.ignore();
     }
@@ -125,13 +125,13 @@ int main(){
     }
 
     std::multimap<int, DoubleLL<std::string>, std::greater<int>> sortedPorts;
-    for(auto& [port, stats]: mapFrequency){
+    for(auto& [port, stats] : mapFrequency){
         stats.second.invert();
         sortedPorts.insert({stats.first,stats.second});
     }
 
     std::ofstream bitacoraOutAccessDescPORT("bitacoraOutAccessDescPORT.txt");
-    for(auto& portSection:sortedPorts){
+    for(auto& portSection : sortedPorts){
         bitacoraOutAccessDescPORT<<portSection.second.turnToText();
     }
     bitacoraOutAccessDescPORT.close();

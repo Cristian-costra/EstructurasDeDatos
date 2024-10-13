@@ -223,7 +223,7 @@ void DoubleLL<T>::merge(DoubleLL<T>& listToAppend){
     if (listToAppend.size == 0){
         return;
     }
-    if(this->size==0){
+    if(this->size == 0){
         this->head=listToAppend.head;
         listToAppend.head=new DoubleNode<T> (T());
         listToAppend.head->setNext(listToAppend.head);
@@ -299,7 +299,7 @@ template <class T>
 void DoubleLL<T>::erase(int index){
 
 
-    if(index >= this->size || index < 0 || this->head==nullptr){
+    if(index >= this->size || index < 0 || this->head == nullptr){
         std::cerr<<"Out of range";
         return;
     } else if (this->size == 1){
@@ -437,7 +437,7 @@ typename DoubleLL<T>::Iterator& DoubleLL<T>::Iterator::operator+(unsigned int tr
     if(this == nullptr){
         throw(std::invalid_argument("La lista está vacía. "));
     }
-    for(int i=0; i<transIndex; i++){
+    for(int i=0; i < transIndex; i++){
         current=current->getNext();
     }
     return *this;
@@ -446,10 +446,10 @@ typename DoubleLL<T>::Iterator& DoubleLL<T>::Iterator::operator+(unsigned int tr
 template <class T>
 typename DoubleLL<T>::Iterator& DoubleLL<T>::Iterator::operator-(unsigned int transIndex)
 {
-    if(this == nullptr){
+    if(this == nullptr ){
         throw(std::invalid_argument("La lista está vacía. "));
     }
-    for(int i=0; i<transIndex; i++){
+    for(int i=0; i < transIndex; i++){
         current=current->getPrevious();
     }
     return *this;

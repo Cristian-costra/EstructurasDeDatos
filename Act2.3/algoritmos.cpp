@@ -11,7 +11,7 @@ RETURN: String ip, regresa la ip.
 std::string obtainIp(const std::string& str){
     std::stringstream ssStr(str);
     std::string ip;
-    for(int i=0; i<4; i++){
+    for(int i=0; i < 4; i++){
         ssStr>>ip;
     }
     return ip;
@@ -26,7 +26,7 @@ RETURN: String port, regresa el puerto.
 std::string obtainPort(const std::string& str){
     std::stringstream ssStr(str);
     std::string port;
-    for(int i=0; i<4; i++){
+    for(int i=0; i < 4; i++){
         ssStr>>port;
     }
     return port.substr(port.find(':')+1,port.find(' '));
@@ -44,9 +44,9 @@ int operator>( std::string& a,  std::string& b){
     std::stringstream ssStr1(a), ssStr2(b);
     while(ssStr1>>numAct1 && ssStr2 >> numAct2)
     {    
-        if (numAct1>numAct2){
+        if (numAct1 > numAct2){
             return 1;
-        } else if (numAct2>numAct1) {
+        } else if (numAct2 > numAct1) {
             return 0;
         }
         ssStr1.ignore();
