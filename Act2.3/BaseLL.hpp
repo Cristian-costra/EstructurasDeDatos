@@ -41,9 +41,21 @@ class BaseLL{
         virtual void empty();
 };
 
+/*
+PARAMETROS: void.
+METODO: Construye una cabeza para la lista apuntando a nullptr.
+ORDEN: O(1).
+RETURN: void. Construye la cabeza de la lista.
+*/
 template <class T, class NodeType>
 BaseLL<T, NodeType>::BaseLL():head(nullptr), size(0){}
 
+/*
+PARAMETROS: void.
+METODO: Construye una cabeza que apunta al primer elemento de la lista y sus elementos siguientes.
+ORDEN: O(n). n = elements.size().
+RETURN: void. Se crea la cabeza de la lista que apunta a los elementos con los que se construyó
+*/
 template <class T, class NodeType>
 BaseLL<T, NodeType>::BaseLL(std::initializer_list<T> elements){
 
@@ -69,6 +81,7 @@ BaseLL<T, NodeType>::BaseLL(std::initializer_list<T> elements){
     }
 }
 
+
 template <class T, class NodeType> 
 BaseLL<T, NodeType>:: BaseLL(const BaseLL<T, NodeType>& listToCopy):head(nullptr), size(0){
     operator=(listToCopy);
@@ -87,6 +100,13 @@ BaseLL<T, NodeType>:: ~BaseLL(){
     }
 }
 
+/*
+PARAMETROS: Recibe una lista para copiarla.
+METODO: Verifica que no se iguale con la cabeza original. Vacia los elementos a los que apunta la cabeza y copia los datos de cada nodo
+de la nueva cabeza en nuevos nodos y los agrega al final de la lista actual hasta llegar al final de la lista a copiar.
+ORDEN: O(n). n = elementos de la lista a copiar.
+RETURN: BaseLL<T, NodeType>. Se copia la lista a copiar con nuevos nodos.
+*/
 template <class T, class NodeType>
 auto & BaseLL<T, NodeType>::operator=(const BaseLL<T, NodeType>& listToCopy){
 
@@ -120,6 +140,12 @@ auto & BaseLL<T, NodeType>::operator=(const BaseLL<T, NodeType>& listToCopy){
     return *this;
 }
 
+/*
+PARAMETROS: Recibe un indice de un elemento que se quiere regresar.
+METODO: Verifica que el indice este en el rango del tamaño de la lista. Recorre la lista regresa el valor del nodo que encuentra.
+ORDEN: O(n). n = indice de elementos que se van a recorrer.
+RETURN: T. Regresa el dato de un nodo por referencia.
+*/
 template <class T, class NodeType>
 T& BaseLL<T, NodeType>::operator[](unsigned int index){
     
@@ -136,6 +162,12 @@ T& BaseLL<T, NodeType>::operator[](unsigned int index){
     return currentNode->getData();
 }
 
+/*
+PARAMETROS: void.
+METODO: Elimina cada nodo de inicio a fin hasta llegar al final.
+ORDEN: O(n). n = tamaño de la lista.
+RETURN: void. Vacia la lista.
+*/
 template <class T, class NodeType>
 void BaseLL <T, NodeType>::empty(){
     while(head != nullptr){ // Se utiliza la variable head en vez de crear otra para ir accediendo los elementos. 
@@ -146,6 +178,12 @@ void BaseLL <T, NodeType>::empty(){
     size=0;
 }
 
+/*
+PARAMETROS: Recibe un valor de tipo T y el indice de un elemento a cambiar su valor.
+METODO: Verifica que el indice este en el rango del tamaño de la lista. Busca la posición del nodo y remplaza su dato por referencia.
+ORDEN: O(n). n = indice de elementos que se van a recorrer.
+RETURN: void. Regresa la lista el elemento del indice intercambiado con el argumento data.
+*/
 template <class T, class NodeType>
 void BaseLL<T, NodeType>::update(T data, int index){
     
@@ -156,6 +194,12 @@ void BaseLL<T, NodeType>::update(T data, int index){
     operator[](index)=data;
 }
 
+/*
+PARAMETROS: Recibe un indice de un nodo a buscar.
+METODO: Verifica que el indice este en el rango del tamaño de la lista. Recorre cada nodo hasta llegar al nodo de indice.
+ORDEN: O(n). n = indice de elementos que se van a recorrer.
+RETURN: NodeType. Regresa el nodo que esta en el indice del argumento.
+*/
 template <class T, class NodeType>
 NodeType* BaseLL<T, NodeType>::getNode(int index){
         
@@ -185,7 +229,12 @@ bool BaseLL<T,NodeType>::isEmpty(){
     return false;
 }
 
-
+/*
+PARAMETROS: Recibe un dato de tipo T para buscar su indice.
+METODO: Itera la lista de inicio a fun hasta encontrar el primer valor que se iguale con el argumento data, si no se encuentra regresa -1.
+ORDEN: O(n). n = tamaño de la lista.
+RETURN: int. Indece donde se encuentra el valor buscado.
+*/
 template <class T, class NodeType>
 int BaseLL<T,NodeType>::search(T data){
     NodeType* currentNode=this->head;
@@ -201,6 +250,12 @@ int BaseLL<T,NodeType>::search(T data){
     return -1;
 }
 
+/*
+PARAMETROS: Recibe 2 indices que remplazaran valor.
+METODO: Toma el dato de los 2 indices con un buffer y los remplaza.
+ORDEN: O(1).
+RETURN: void. Regresa la lista con esos 2 datos remplazados.
+*/
 template <class T, class NodeType>
 void BaseLL<T,NodeType>::exchange(int indexA, int indexB){
     T buffer = operator[](indexA);
@@ -208,6 +263,12 @@ void BaseLL<T,NodeType>::exchange(int indexA, int indexB){
     operator[](indexB) = buffer;
 }
 
+/*
+PARAMETROS: void.
+METODO: Toma el indice a la mitad de la lista e itera cada elemento con su reflejo y los intercambia hasta llegar al dato en medio de la lista.
+ORDEN: O(n).
+RETURN: void. Regresa la lista invertida de inicio a fin.
+*/
 template <class T, class NodeType>
 void BaseLL<T,NodeType>::invert(){
     int positionA = 0, half = (size % 2 ==0) ? size/2: 1 + size/2;
@@ -217,6 +278,12 @@ void BaseLL<T,NodeType>::invert(){
     }
 }
 
+/*
+PARAMETROS: void.
+METODO: Recorre cada elemento de la lista e imprime cada valor de sus nodos.
+ORDEN: O(n). n = tamaño de la lista
+RETURN: void. Imprime cada elemento de la lista.
+*/
 template <class T, class NodeType>
 void BaseLL<T,NodeType>::print(){
     NodeType* currentNode = this->head;

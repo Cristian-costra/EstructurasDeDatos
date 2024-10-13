@@ -1,3 +1,9 @@
+// Act2_3
+// Última modificación: 12/10/2024
+// Cristian Ricardo Luque Arámbula - A01741850
+// Oliver Moreno Ibarra - A01742930
+// Rodolfo Blas Romero Valdez - A01741665
+
 #include <iostream>
 #include <fstream>
 #include <string>

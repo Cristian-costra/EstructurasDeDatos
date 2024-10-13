@@ -47,6 +47,12 @@ class DoubleLL:public BaseLL<T, DoubleNode<T>>{
         Iterator end();
 };
 
+/*
+PARAMETROS: void.
+METODO: Construye una lista doblemente enlazada con un nodo cabeza apuntando a nullptr.
+ORDEN: O(1).
+RETURN: void. Se construye una nueva lista por defecto.
+*/
 template <class T>
 DoubleLL<T>::DoubleLL(){ 
     this->head =new DoubleNode<T> (T());        
@@ -55,12 +61,24 @@ DoubleLL<T>::DoubleLL(){
     this->size=0;
 }
 
+/*
+PARAMETROS: void.
+METODO: Llama al método empty que elimina los nodos de la lista y a la cabeza.
+ORDEN: O(n). n = tamaño de la lista.
+RETURN: void. Se elimina la lista.
+*/
 template <class T> 
 DoubleLL<T>::~DoubleLL(){
     empty();
     delete this->head;
 }
 
+/*
+PARAMETROS: void.
+METODO: Mientras que la lista no este vacia, recorre la lista de inicio a fin y elimina cada nodo hasta llegar al que apunta la cabeza, borra todos y crea un nuevo nodo default a la cabeza, .
+ORDEN: O(n). n = tamaño de la lista.
+RETURN: void. Se elimina la lista.
+*/
 template <class T>
 void DoubleLL<T>::empty(){
     if(this->size == 0){
@@ -79,6 +97,12 @@ void DoubleLL<T>::empty(){
     this->size=0;
 }
 
+/*
+PARAMETROS: std::initializer_list<T> elements, lista de elementos.
+METODO: Agrega los elementos de la lista a agregar al final de la lista actual.
+ORDEN: O(n). n = tamaño de la lista a agregar.
+RETURN: void. Regresa la lista doble con esos elementos.
+*/
 template <class T>
 DoubleLL<T>::DoubleLL(std::initializer_list<T> elements){
     
@@ -108,6 +132,12 @@ DoubleLL<T>::DoubleLL(std::initializer_list<T> elements){
     }
 }
 
+/*
+PARAMETROS: DoubleLL<T>& listToCopy, lista de elementos.
+METODO: Agrega los elementos de la lista a agregar al final de la lista actual.
+ORDEN: O(n). n = tamaño de la lista a agregar.
+RETURN: void. Regresa la lista doble con esos elementos.
+*/
 template <class T>
 DoubleLL<T>:: DoubleLL(const DoubleLL<T>& listToCopy){
     this->head = new DoubleNode<T> (T());
@@ -118,6 +148,12 @@ DoubleLL<T>:: DoubleLL(const DoubleLL<T>& listToCopy){
     *this = listToCopy; // Usar *this para referirse al objeto y poder mandar llamar a la sobrecarga de asignación. 
 }
 
+/*
+PARAMETROS: DoubleNode<T>& nodeToAppend, nodo a agregar.
+METODO: Agrega un nuevo nodo a un elemento atras de la cabeza.
+ORDEN: O(1).
+RETURN: void. Regresa la lista doble con un nodo nuevo al final.
+*/
 template <class T>
 void DoubleLL<T>::append(const DoubleNode<T>& nodeToAppend){
     DoubleNode<T>* newNode = (this->size == 0) ? this->head : new DoubleNode<T> (nodeToAppend.getData());
@@ -133,6 +169,12 @@ void DoubleLL<T>::append(const DoubleNode<T>& nodeToAppend){
     this->size++;
 }
 
+/*
+PARAMETROS: Recibe una lista del tipo de dato T.
+METODO: Coloca el inicio de la lista en el ultimo nodo la lista original, luego itera la listToAppend copiando su contenido en nuevos nodos y los une.
+ORDEN: O(n). n = cantidad de elementos a copiar.
+RETURN: void. Regresa la lista original con los elementos de la lista agregada al final.
+*/
 template <class T>
 void DoubleLL<T>::append(const DoubleLL<T>& listToAppend){
     if (listToAppend.size == 0){
@@ -170,6 +212,12 @@ void DoubleLL<T>::append(const DoubleLL<T>& listToAppend){
     this->size += listToAppend.size;
 }
 
+/*
+PARAMETROS: Recibe una lista del tipo de dato T.
+METODO: Verifica que el tamaño de la nueva lista no sea 0, y agrega el primer elemento y ultimo al final e inicio de la lista actual, vaciando la lista que se agrego.
+ORDEN: O(1).
+RETURN: void. Regresa la lista original con los elementos de la lista agregada al final por referencia.
+*/
 template <class T>
 void DoubleLL<T>::merge(DoubleLL<T>& listToAppend){
     if (listToAppend.size == 0){
@@ -200,6 +248,13 @@ void DoubleLL<T>::merge(DoubleLL<T>& listToAppend){
     listToAppend.size=0;
 }
 
+/*
+PARAMETROS: DoubleLL<T>, Recibe una lista para copiarla.
+METODO: Verifica que no se iguale con la lista original. Vacia la lista y copia los datos de cada nodo
+de la nueva lista en nuevos nodos y los agrega al final de la lista actual hasta llegar al final de la lista a copiar.
+ORDEN: O(n). n = elementos de la lista a copiar.
+RETURN: DoubleLL<T>. Se copia la lista a copiar con nuevos nodos.
+*/
 template<class T>
 const DoubleLL<T> & DoubleLL<T>::operator=(const DoubleLL<T> & listToCopy) {
     if (this == &listToCopy){ 
@@ -234,6 +289,12 @@ const DoubleLL<T> & DoubleLL<T>::operator=(const DoubleLL<T> & listToCopy) {
     return *this;
 }
 
+/*
+PARAMETROS: Recibe un indice de un elemento a borrar.
+METODO: Verifica que la lista no este vacia y el indice este en el rango del tamaño de la lista. Busca la posición del nodo y lo elimina, y une los nodos anterior y posteriores.
+ORDEN: O(n). n = indice de elementos que se van a recorrer.
+RETURN: void. Regresa la lista el elemento del indice del argumento.
+*/
 template <class T>
 void DoubleLL<T>::erase(int index){
 
@@ -266,17 +327,35 @@ void DoubleLL<T>::erase(int index){
     this->size--;
 }
 
+/*
+PARAMETROS: Recibe un nodo y un indice al cual se insertara el nodo.
+METODO: Verifica que la lista no este vacia, y que index este en el rango del primer elemento y size.
+ORDEN: O(n). n = index.
+RETURN: Regresa como referencia del dato del nodo para que pueda ser modificado.
+*/
 template <class T>
 void DoubleLL<T>::insert(T data, int index){
     this->insert(* new DoubleNode<T> (data), index);
 }
 
+/*
+PARAMETROS: Recibe un dato tipo T a agregar a la lista.
+METODO: Crea una lista con 1 solo elemento y la agrega a la lista grande con append().
+ORDEN: O(1).
+RETURN: void. Se agregó el elemento data a la listo
+*/
 template <class T>
 void DoubleLL<T>::append(T data){
     DoubleNode<T> temp(data);
     this->append(temp);
 }
 
+/*
+PARAMETROS: void.
+METODO: Recorre cada elemento de la lista e imprime cada valor de sus nodos.
+ORDEN: O(n). n = tamaño de la lista
+RETURN: void. Imprime cada elemento de la lista.
+*/
 template <class T>
 void DoubleLL<T>::print(){
     DoubleNode<T>* currentNode = this->head;
@@ -300,6 +379,12 @@ std::string DoubleLL<T>::turnToText(){
     return text; 
 }
 
+/*
+PARAMETROS: Recibe un nodo y un indice al cual se insertara el nodo.
+METODO: Verifica que la lista no este vacia, y que index este en el rango del primer elemento y size.
+ORDEN: O(n). n = index.
+RETURN: Regresa como referencia del dato del nodo para que pueda ser modificado.
+*/
 template <class T>
 void DoubleLL<T>::insert(DoubleNode<T>& nodeToInsert, int index){
     if(index >= this->size || index < 0){

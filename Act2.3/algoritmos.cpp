@@ -2,6 +2,12 @@
 #include <string>
 #include <sstream>
 
+/*
+PARAMETROS: String str. Una entrada de la bitácora.
+METODO: Separa cada espacio de la entrada de la bitácora y solamente deja la ip.
+ORDEN: O(1).
+RETURN: String ip, regresa la ip.
+*/
 std::string obtainIp(const std::string& str){
     std::stringstream ssStr(str);
     std::string ip;
@@ -11,6 +17,12 @@ std::string obtainIp(const std::string& str){
     return ip;
 }
 
+/*
+PARAMETROS: String str. Una entrada de la bitácora.
+METODO: Separa cada espacio de la entrada de la bitácora y separa el puerto de la ip, regresando solo el puerto.
+ORDEN: O(1).
+RETURN: String port, regresa el puerto.
+*/
 std::string obtainPort(const std::string& str){
     std::stringstream ssStr(str);
     std::string port;
@@ -20,6 +32,12 @@ std::string obtainPort(const std::string& str){
     return port.substr(port.find(':')+1,port.find(' '));
 }
 
+/*
+PARAMETROS: 2 string a comparar.
+METODO: Regresa un entero 1 o 0 que refresenta si es mayor o no.
+ORDEN: O(1).
+RETURN: Int 1 si es verdad que es menor, int 0 de lo contrario.
+*/
 int operator>( std::string& a,  std::string& b){
     int numAct1=0, numAct2=0;
 
@@ -37,7 +55,12 @@ int operator>( std::string& a,  std::string& b){
     return 0;
 }
 
-
+/*
+PARAMETROS: DoubleLL<T>& l, std::string clave, recibe la lista y una clave a buscar.
+METODO: Separa la lista en mitades buscando la ip hasta encontrar una ip que coincida o la que más se acerque.
+ORDEN: O(log(n)). n = cantidad de elementos de la lista
+RETURN: Regresa el indice de ese dato a buscar.
+*/
 template <class T>
 int busquedaBinaria(DoubleLL<T>& l, std::string clave){
     int inicio=0, final=l.length()-1;
@@ -63,6 +86,12 @@ int busquedaBinaria(DoubleLL<T>& l, std::string clave){
     return mitad;
 }
 
+/*
+PARAMETROS: DoubleLL<T>& l, typename DoubleLL<T>::Iterator itHalf, int n. Una lista, un iterador de su mitad y el tamaño de la sublista.
+METODO: Separa la lista en mitades buscando y al ser listas de 1 elemento, las compara ordenandolas por el algoritmo de divide y venceras.
+ORDEN: O(nlog(n)). n = cantidad de elementos de la lista original.
+RETURN: void. Regresa esta lista ordenada.
+*/
 template <class T>
 void ordMerge(DoubleLL<T> &l, typename DoubleLL<T>::Iterator itHalf, int n) { // el segundo iterador está localizado a la mitad. Se planea incluirlo como parámetro para que no se tenga que desplazar a la mitad desde la izquierda
     if (n == 1) return;
